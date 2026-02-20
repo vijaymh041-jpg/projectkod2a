@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KodNest Premium Build System</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Inter:wght@400;600&display=swap">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <style>
+        /* Embedding custom fonts directly for this example */
+        body {
+            font-family: 'Inter', var(--font-family-sans);
+        }
+        h1, h2, h3, h4, h5, h6, .context-header__headline, .proof-footer__title, .card__title {
+            font-family: 'Lora', var(--font-family-serif);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Top Bar -->
+    <header class="top-bar">
+        <div class="top-bar__project-name">Project Phoenix</div>
+        <div class="top-bar__progress">Step 2 / 5</div>
+        <div class="top-bar__status">
+            <span class="status-badge status-badge--in-progress">In Progress</span>
+        </div>
+    </header>
+
+    <!-- 2. Context Header -->
+    <section class="context-header">
+        <h1 class="context-header__headline">Build Your Component</h1>
+        <p class="context-header__subtext">
+            This workspace is for constructing the primary UI and logic for your new component. Follow the steps in the side panel to proceed.
+        </p>
+    </section>
+
+    <!-- Main Content Wrapper -->
+    <main class="main-content">
+
+        <!-- 3. Primary Workspace (70%) -->
+        <div class="primary-workspace">
+            <div class="card">
+                <h2 class="card__title">Primary Task</h2>
+                <div class="card__content text-block">
+                    <p>This is the main area for user interaction. It might contain forms, canvases, or complex application views. The design is clean and predictable, ensuring the user can focus without distraction.</p>
+                    <label for="componentName" style="display: block; margin-bottom: 8px; font-weight: 600;">Component Name</label>
+                    <input type="text" id="componentName" class="form-input" placeholder="e.g., 'UserProfileCard'">
+                </div>
+            </div>
+
+            <div class="card card--error">
+                <h2 class="card__title">Example Error State</h2>
+                <div class="card__content text-block">
+                    <p>Something went wrong during the last build. The build service returned a 500 error. Please check the service status and try again. This message explains the issue without blaming the user.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card__title">Next Steps</h2>
+                 <div class="card__content">
+                    <p>Further instructions or secondary tasks would appear in subsequent cards.</p>
+                    <button class="btn btn-primary">Submit Component</button>
+                    <button class="btn btn-secondary">Save Draft</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Secondary Panel (30%) -->
+        <aside class="secondary-panel">
+            <h3 class="card__title">Step Explanation</h3>
+            <p class="secondary-panel__explanation">
+                Define the core properties for your component in the main workspace. Use the prompt below as a starting point for the AI build.
+            </p>
+            
+            <h3 class="card__title">Copyable Prompt</h3>
+            <div class="secondary-panel__prompt-box">Create a React component named &lt;componentName&gt; with a title and a description.</div>
+
+            <div class="secondary-panel__actions">
+                <button class="btn btn-calm">Copy Prompt</button>
+                <button class="btn btn-calm">Build in Lovable</button>
+                <button class="btn btn-calm">It Worked!</button>
+                <button class="btn btn-calm">Report Error</button>
+                <button class="btn btn-calm">Add Screenshot</button>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- 5. Proof Footer -->
+    <footer class="proof-footer">
+        <h4 class="proof-footer__title">Proof of Work</h4>
+        <div class="proof-footer__checklist">
+            <div class="proof-footer__item">
+                <input type="checkbox" id="proof-ui" name="proof-ui" checked disabled>
+                <label for="proof-ui">UI Built</label>
+            </div>
+            <div class="proof-footer__item">
+                <input type="checkbox" id="proof-logic" name="proof-logic">
+                <label for="proof-logic">Logic Working</label>
+            </div>
+            <div class="proof-footer__item">
+                <input type="checkbox" id="proof-test" name="proof-test">
+                <label for="proof-test">Test Passed</label>
+            </div>
+            <div class="proof-footer__item">
+                <input type="checkbox" id="proof-deploy" name="proof-deploy">
+                <label for="proof-deploy">Deployed</label>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+/*
+--- KODNEST PREMIUM BUILD SYSTEM ---
+COLOR SYSTEM:
+- Background: #F7F6F3
+- Primary text: #111111
+- Accent: #8B0000 (deep red)
+
+TYPOGRAPHY:
+- Headings: Serif (Lora)
+- Body: Sans-serif (Roboto)
+
+SPACING (8px scale):
+- 8px, 16px, 24px, 40px, 64px
+*/
+
+:root {
+    /* Colors */
+    --color-background: #F7F6F3;
+    --color-text-primary: #111111;
+    --color-accent: #8B0000;
+    --color-border: #DDDDDD;
+    --color-linkedin: #0A66C2;
+    --color-naukri: #F47100;
+    --color-indeed: #2557A7;
+    --color-success: #28a745;
+    --color-warning: #ffc107;
+    --color-neutral: #6c757d;
+    --color-subtle: #f8f9fa;
+    --color-status-applied: #0d6efd;
+
+    /* Typography */
+    --font-heading: 'Lora', serif;
+    --font-body: 'Roboto', sans-serif;
+
+    /* Spacing */
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 40px;
+    --space-5: 64px;
+
+    /* Borders */
+    --border-radius: 4px;
+}
+
+/* --- GLOBAL RESET & DEFAULTS --- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- LAYOUT & NAVIGATION --- */
+.main-header {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding: 0 var(--space-3);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.main-nav { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+.logo a { font-family: var(--font-heading); font-size: 24px; font-weight: 700; color: var(--color-text-primary); text-decoration: none; }
+.nav-links { display: flex; list-style: none; margin: 0; padding: 0; gap: var(--space-3); }
+.nav-links a { font-size: 16px; color: var(--color-text-primary); text-decoration: none; padding: var(--space-1) 0; border-bottom: 2px solid transparent; transition: border-color 150ms ease-in-out; }
+.nav-links a:hover, .nav-links a.active { border-bottom-color: var(--color-accent); }
+.hamburger { display: none; cursor: pointer; }
+.hamburger span { display: block; width: 25px; height: 3px; margin: 5px 0; background-color: var(--color-text-primary); transition: all 0.3s ease-in-out; }
+.main-container { padding: var(--space-4) var(--space-3); }
+.page-content h1 { font-family: var(--font-heading); font-size: 48px; margin-bottom: var(--space-2); }
+
+/* --- COMPONENTS --- */
+.btn { font-size: 14px; padding: 8px var(--space-2); border-radius: var(--border-radius); cursor: pointer; text-align: center; text-decoration: none; border: 1px solid transparent; transition: all 150ms ease-in-out; }
+.btn-primary { background-color: var(--color-accent); color: var(--color-background); }
+.btn-primary:hover { background-color: #6a0000; }
+.btn-secondary { background-color: transparent; color: var(--color-text-primary); border-color: var(--color-border); }
+.btn-secondary:hover { background-color: #f0f0f0; border-color: #ccc; }
+.card { background-color: #FFFFFF; border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--space-3); margin-top: var(--space-3); max-width: 720px; }
+.empty-state { text-align: center; padding: var(--space-5) var(--space-3); background-color: #fff; border: 1px solid var(--color-border); border-radius: var(--border-radius); margin-top: var(--space-3); }
+
+/* --- JOB & DASHBOARD --- */
+.filter-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-2); padding: var(--space-2); background-color: #fff; border: 1px solid var(--color-border); border-radius: var(--border-radius); margin-bottom: var(--space-2); }
+.filter-bar input, .filter-bar select { width: 100%; padding: 8px; font-size: 14px; border: 1px solid var(--color-border); border-radius: var(--border-radius); }
+.dashboard-controls { margin-bottom: var(--space-3); }
+.job-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--space-3); }
+.job-card { background-color: #fff; border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--space-3); display: flex; flex-direction: column; }
+.job-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-1); }
+.job-card h3 { font-size: 18px; line-height: 1.4; margin: 0; padding-right: var(--space-1); }
+.job-card .company { font-weight: 500; margin: 0 0 var(--space-2) 0; }
+.job-card .meta-info { font-size: 14px; color: #666; margin: 0 0 var(--space-2) 0; }
+.job-card-actions { margin-top: var(--space-2); display: flex; gap: var(--space-1); }
+.job-card-badges { display: flex; gap: var(--space-1); align-items: center; margin-left: var(--space-1); flex-shrink: 0; }
+
+/* --- BADGES --- */
+.source-badge, .score-badge, .status-badge { font-size: 12px; padding: 4px 8px; border-radius: var(--border-radius); color: #fff; font-weight: 500; text-align: center; white-space: nowrap; }
+.source-badge.linkedin { background-color: var(--color-linkedin); }
+.source-badge.naukri { background-color: var(--color-naukri); }
+.source-badge.indeed { background-color: var(--color-indeed); }
+.score-badge.score-high { background-color: var(--color-success); }
+.score-badge.score-medium { background-color: var(--color-warning); color: var(--color-text-primary); }
+.score-badge.score-low { background-color: var(--color-neutral); }
+.score-badge.score-none { background-color: var(--color-border); color: var(--color-text-primary); }
+.status-badge.status-not-applied { background-color: var(--color-neutral); }
+.status-badge.status-applied { background-color: var(--color-status-applied); }
+.status-badge.status-selected { background-color: var(--color-success); }
+.status-badge.status-rejected { background-color: var(--color-accent); }
+
+/* --- NEW STATUS & DIGEST STYLES --- */
+.job-card-status { display: flex; align-items: center; gap: var(--space-1); margin-top: auto; padding-top: var(--space-2); border-top: 1px solid var(--color-border); }
+.status-selector { font-size: 12px; padding: 2px 4px; border: 1px solid var(--color-border); border-radius: var(--border-radius); background-color: #fff; margin-left: auto; }
+.toast { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background-color: var(--color-text-primary); color: white; padding: var(--space-2) var(--space-3); border-radius: var(--border-radius); z-index: 101; opacity: 0; transition: opacity 0.5s, bottom 0.5s; }
+.toast.show { opacity: 1; bottom: 40px; }
+.digest-status-updates { margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--color-border); }
+.digest-status-updates h3 { font-size: 20px; margin-bottom: var(--space-2); }
+.digest-status-updates ul { list-style: none; padding: 0; margin: 0; }
+.digest-status-updates li { font-size: 14px; padding: var(--space-1) 0; }
+.digest-status-updates .update-date { color: #999; font-size: 12px; margin-left: var(--space-1); }
+
+/* --- OTHER UI & RESPONSIVE --- */
+.banner { background-color: var(--color-warning); color: var(--color-text-primary); padding: var(--space-2); border-radius: var(--border-radius); margin-bottom: var(--space-3); text-align: center; }
+.banner a { color: var(--color-accent); font-weight: bold; }
+.toggle-switch { position: relative; display: inline-flex; align-items: center; font-size: 14px; }
+.toggle-switch .slider { width: 44px; height: 24px; position: relative; cursor: pointer; background-color: #ccc; transition: .4s; border-radius: 24px; margin-right: var(--space-1); }
+.toggle-switch .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--color-accent); }
+input:checked + .slider:before { transform: translateX(20px); }
+.form-group .checkbox-group { display: flex; gap: var(--space-2); align-items: center; }
+
+@media (max-width: 768px) {
+    .nav-links { display: none; position: absolute; top: 64px; left: 0; width: 100%; background-color: var(--color-background); border-bottom: 1px solid var(--color-border); flex-direction: column; align-items: center; padding: var(--space-2) 0; }
+    .nav-links.active { display: flex; }
+    .hamburger { display: block; }
+}

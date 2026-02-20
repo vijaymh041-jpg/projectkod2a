@@ -124,6 +124,18 @@ body {
 .digest-status-updates li { font-size: 14px; padding: var(--space-1) 0; }
 .digest-status-updates .update-date { color: #999; font-size: 12px; margin-left: var(--space-1); }
 
+/* --- TEST CHECKLIST --- */
+.checklist-container { max-width: 100%; }
+.checklist-item { display: flex; align-items: flex-start; gap: var(--space-2); padding: var(--space-2) 0; border-bottom: 1px solid var(--color-border); }
+.checklist-item:last-child { border-bottom: none; }
+.checklist-item input[type="checkbox"] { width: 18px; height: 18px; margin-top: 4px; accent-color: var(--color-accent); cursor: pointer; }
+.checklist-item label { cursor: pointer; font-weight: 500; flex-grow: 1; }
+.checklist-hint { display: inline-block; font-size: 12px; color: var(--color-neutral); cursor: help; margin-left: var(--space-1); border-bottom: 1px dotted; }
+.test-summary { margin-bottom: var(--space-3); padding: var(--space-3); border-radius: var(--border-radius); background: #fff; border: 1px solid var(--color-border); }
+.test-summary.all-passed { border-color: var(--color-success); background: #f0fff4; }
+.test-summary h2 { margin: 0 0 var(--space-1) 0; font-family: var(--font-heading); font-size: 24px; }
+.warning-text { color: var(--color-accent); font-weight: bold; font-size: 14px; margin: 0; }
+
 /* --- OTHER UI & RESPONSIVE --- */
 .banner { background-color: var(--color-warning); color: var(--color-text-primary); padding: var(--space-2); border-radius: var(--border-radius); margin-bottom: var(--space-3); text-align: center; }
 .banner a { color: var(--color-accent); font-weight: bold; }

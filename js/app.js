@@ -16,6 +16,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let savedJobs = JSON.parse(localStorage.getItem('savedJobs')) || [];
     let preferences = JSON.parse(localStorage.getItem('jobTrackerPreferences')) || defaultPreferences;
     let jobStatuses = JSON.parse(localStorage.getItem('jobTrackerStatus')) || {};
+    
+    const testItems = [
+        { label: "Preferences persist after refresh", hint: "Change settings, refresh, and check if values remain." },
+        { label: "Match score calculates correctly", hint: "Check if score badge matches the logic rules." },
+        { label: "Show only matches toggle works", hint: "Toggle on dashboard and verify list filters by threshold." },
+        { label: "Save job persists after refresh", hint: "Save a job, refresh, and check the Saved page." },
+        { label: "Apply opens in new tab", hint: "Click Apply and verify it opens a new browser tab." },
+        { label: "Status update persists after refresh", hint: "Change status, refresh, and verify badge color." },
+        { label: "Status filter works correctly", hint: "Filter by 'Applied' or 'Selected' on dashboard." },
+        { label: "Digest generates top 10 by score", hint: "Generate digest and verify order/count." },
+        { label: "Digest persists for the day", hint: "Generate digest, refresh, and verify it doesn't ask to regenerate." },
+        { label: "No console errors on main pages", hint: "Open DevTools and check for red errors while navigating." }
+    ];
+    let testStatus = JSON.parse(localStorage.getItem('jobTrackerTestStatus')) || new Array(testItems.length).fill(false);
 
     // --- HELPER FUNCTIONS ---
     const getSkillsAsBadges = (skills) => skills.map(skill => `<span class="skill-badge">${skill}</span>`).join('');
@@ -244,10 +258,60 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('job-listing').innerHTML = savedJobDetails.length ? savedJobDetails.map(createJobCard).join('') : `<div class="empty-state"><p>You haven't saved any jobs yet.</p></div>`;
             }
         },
-        '/proof': { title: 'Proof', content: `<div class="page-content"><h1>Proof of Work</h1><p>Placeholder</p></div>` }
+        '/proof': { title: 'Proof', content: `<div class="page-content"><h1>Proof of Work</h1><p>Placeholder</p></div>` },
+        '/jt/07-test': {
+            title: 'Test Checklist',
+            onRender: () => {
+                const passedCount = testStatus.filter(v => v).length;
+                const allPassed = passedCount === testItems.length;
+                app.innerHTML = `
+                    <div class="page-content">
+                        <h1>Test Checklist</h1>
+                        <div class="test-summary ${allPassed ? 'all-passed' : ''}">
+                            <h2>Tests Passed: ${passedCount} / ${testItems.length}</h2>
+                            ${!allPassed ? '<p class="warning-text">Resolve all issues before shipping.</p>' : '<p style="color: var(--color-success)">Ready to ship!</p>'}
+                            <button id="reset-tests-btn" class="btn btn-secondary" style="margin-top: 10px;">Reset Test Status</button>
+                        </div>
+                        <div class="card checklist-container">
+                            ${testItems.map((item, index) => `
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="test-${index}" ${testStatus[index] ? 'checked' : ''}>
+                                    <div>
+                                        <label for="test-${index}">${item.label}</label>
+                                        <span class="checklist-hint" title="${item.hint}">ⓘ How to test</span>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>`;
+                document.querySelectorAll('.checklist-item input').forEach((cb, index) => {
+                    cb.addEventListener('change', (e) => {
+                        testStatus[index] = e.target.checked;
+                        localStorage.setItem('jobTrackerTestStatus', JSON.stringify(testStatus));
+                        routes['/jt/07-test'].onRender();
+                    });
+                });
+                document.getElementById('reset-tests-btn').addEventListener('click', () => {
+                    testStatus = new Array(testItems.length).fill(false);
+                    localStorage.setItem('jobTrackerTestStatus', JSON.stringify(testStatus));
+                    routes['/jt/07-test'].onRender();
+                });
+            }
+        },
+        '/jt/08-ship': {
+            title: 'Ship',
+            onRender: () => {
+                app.innerHTML = `<div class="page-content"><h1>Shipment Ready</h1><div class="card"><p>Congratulations! All tests passed. The application is ready for deployment.</p></div></div>`;
+            }
+        }
     };
 
     const render = (path) => {
+        if (path === '/jt/08-ship' && testStatus.filter(v => v).length < testItems.length) {
+            app.innerHTML = `<div class="page-content"><h1>Shipment Locked</h1><div class="card card--error"><p>Please complete all items in the <a href="#/jt/07-test">Test Checklist</a> before shipping.</p></div></div>`;
+            updateActiveLink(path);
+            return;
+        }
         const route = routes[path] || routes['/'];
         document.title = `KodNest - ${route.title}`;
         if (route.onRender) route.onRender();

@@ -127,3 +127,112 @@ body {
     height: 16px;
     accent-color: var(--color-accent);
 }
+
+/* --- New Job Notification Tracker Navigation --- */
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) var(--space-5);
+    border-bottom: var(--border-width) var(--border-style) var(--border-color-default);
+    background-color: #FFFFFF;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+}
+
+.nav-links a {
+    font-family: var(--font-family-sans);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    padding-bottom: var(--space-1);
+    border-bottom: 2px solid transparent;
+    transition: border-color var(--transition-duration) var(--transition-timing);
+}
+
+.nav-links a:hover {
+    border-bottom-color: var(--color-border);
+    opacity: 1; /* Override default link opacity hover */
+}
+
+.nav-links a.active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+}
+
+.nav-hamburger {
+    display: none; /* Hidden on desktop */
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.nav-hamburger .line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-text-primary);
+    margin: 5px 0;
+    transition: transform var(--transition-duration) var(--transition-timing),
+                opacity var(--transition-duration) var(--transition-timing);
+}
+
+/* --- Page Placeholder Content --- */
+
+.placeholder-content {
+    text-align: center;
+    padding: var(--space-8) var(--space-5);
+    flex-grow: 1;
+}
+
+.placeholder-content__headline {
+    font-size: 48px;
+    margin-bottom: var(--space-2);
+}
+
+.placeholder-content__subtext {
+    font-size: 18px;
+    color: #666666;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+
+/* --- Responsive Styles --- */
+
+@media (max-width: 768px) {
+    .nav-hamburger {
+        display: block;
+        z-index: 1001; /* Ensure it's above other content */
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 70%;
+        height: 100vh;
+        background-color: #FFFFFF;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--space-8) var(--space-5);
+        gap: var(--space-4);
+        
+        transform: translateX(100%);
+        transition: transform var(--transition-duration) var(--transition-timing);
+        
+        border-left: var(--border-width) var(--border-style) var(--border-color-default);
+        z-index: 1000;
+    }
+
+    .nav-links.is-open {
+        transform: translateX(0);
+    }
+}

@@ -292,3 +292,100 @@ a:hover {
     border-radius: 2px;
     display: inline-block;
 }
+
+/* --- Navigation --- */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) var(--space-4);
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.main-nav {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.nav-link {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-text);
+    text-decoration: none;
+    padding: var(--space-1) 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color var(--transition-speed) var(--transition-timing), color var(--transition-speed) var(--transition-timing);
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+.nav-link--active {
+    color: var(--accent-color);
+    border-bottom-color: var(--accent-color);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background-color: var(--primary-text);
+    transition: all var(--transition-speed) var(--transition-timing);
+}
+
+/* --- Responsive Navigation --- */
+@media (max-width: 768px) {
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 73px; /* Height of the header */
+        left: 0;
+        right: 0;
+        background-color: var(--bg-color);
+        flex-direction: column;
+        align-items: center;
+        padding: var(--space-3) 0;
+        border-bottom: 1px solid var(--border-color);
+        z-index: 10;
+    }
+
+    .main-nav--active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+    
+    .hamburger.is-active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.is-active span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.is-active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+}
+
+.page-container {
+    padding: var(--space-4);
+}
